@@ -164,6 +164,15 @@ source venv/bin/activate
 
 **Note:** Ensure FFmpeg is properly installed (see Section 8) before using torchcodec.
 
+### Upgrading Dependencies
+
+To upgrade pip and installed packages in an existing virtual environment:
+
+```bash
+source venv/bin/activate
+./upgrade_deps.sh
+```
+
 ---
 
 ## 6. PyTorch, torchaudio, torchcodec for CUDA 12.9 (sm_87)
