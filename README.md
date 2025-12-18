@@ -148,6 +148,22 @@ source venv/bin/activate
 pip install --upgrade pip setuptools wheel
 ```
 
+### Automated Setup Script
+
+For convenience, use the provided `setup_venv.sh` script to create the virtual environment and install all required dependencies:
+
+```bash
+./setup_venv.sh
+```
+
+After running the script, activate the environment with:
+
+```bash
+source venv/bin/activate
+```
+
+**Note:** Ensure FFmpeg is properly installed (see Section 8) before using torchcodec.
+
 ---
 
 ## 6. PyTorch, torchaudio, torchcodec for CUDA 12.9 (sm_87)
