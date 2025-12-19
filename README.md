@@ -131,7 +131,23 @@ nvidia-smi
 
 ---
 
-## 5. Python Environment Strategy
+## 5. cuDSS Installation
+
+cuDSS is required for certain PyTorch operations.
+
+Download and install from NVIDIA:
+
+```bash
+wget https://developer.download.nvidia.com/compute/cudss/0.7.1/local_installers/cudss-local-tegra-repo-ubuntu2204-0.7.1_0.7.1-1_arm64.deb
+sudo dpkg -i cudss-local-tegra-repo-ubuntu2204-0.7.1_0.7.1-1_arm64.deb
+sudo cp /var/cudss-local-tegra-repo-ubuntu2204-0.7.1/cudss-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cudss
+```
+
+---
+
+## 6. Python Environment Strategy
 
 Use **Python 3.10** (JetPack 6 default) and isolate dependencies.
 
@@ -162,7 +178,7 @@ After running the script, activate the environment with:
 source venv/bin/activate
 ```
 
-**Note:** Ensure FFmpeg is properly installed (see Section 8) before using torchcodec.
+**Note:** Ensure FFmpeg is properly installed (see Section 9) before using torchcodec.
 
 ### Upgrading Dependencies
 
@@ -175,7 +191,7 @@ source venv/bin/activate
 
 ---
 
-## 6. PyTorch, torchaudio, torchcodec for CUDA 12.9 (sm_87)
+## 7. PyTorch, torchaudio, torchcodec for CUDA 12.9 (sm_87)
 
 ### CUDA Baseline
 
@@ -265,7 +281,7 @@ print(torch.cuda.get_device_name(0))
 
 ---
 
-## 7. torchaudio
+## 8. torchaudio
 
 `torchaudio` must be **ABI‑compatible** with your PyTorch build.
 
@@ -292,7 +308,7 @@ print(torchaudio.__version__)
 
 ---
 
-## 8. FFmpeg (Critical for torchcodec)
+## 9. FFmpeg (Critical for torchcodec)
 
 ### Why FFmpeg Is Required
 
@@ -337,7 +353,7 @@ ffmpeg -codecs | grep opus
 
 ---
 
-## 9. torchcodec
+## 10. torchcodec
 
 `torchcodec` bridges PyTorch and FFmpeg.
 
@@ -359,7 +375,7 @@ If this fails, inspect:
 
 ---
 
-## 10. Whisper
+## 11. Whisper
 
 Whisper uses:
 
@@ -386,7 +402,7 @@ Performance notes on Orin Nano:
 
 ---
 
-## 11. pyannote.audio
+## 12. pyannote.audio
 
 `pyannote.audio` adds speaker diarization on top of PyTorch and torchaudio.
 
@@ -403,7 +419,7 @@ Notes:
 
 ---
 
-## 12. Common Failure Modes
+## 13. Common Failure Modes
 
 | Symptom                              | Likely Cause                                     |
 | ------------------------------------ | ------------------------------------------------ |
@@ -414,7 +430,7 @@ Notes:
 
 ---
 
-## 13. Final Sanity Checklist
+## 14. Final Sanity Checklist
 
 - [ ] JetPack 6.x installed
 - [ ] CUDA 12.9 visible via `nvcc`
@@ -427,7 +443,7 @@ Notes:
 
 ---
 
-## 14. Closing Notes
+## 15. Closing Notes
 
 The Jetson Orin Nano is capable of running Whisper and pyannote effectively, but only if the CUDA–PyTorch–FFmpeg chain is aligned precisely. Treat the dependency graph as authoritative: when something breaks, trace upward and downward before changing versions blindly.
 
