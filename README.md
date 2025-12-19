@@ -325,24 +325,21 @@ print(torchaudio.__version__)
 - libavutil
 - libswresample
 
-On Jetson, system FFmpeg packages are often:
+### Installation
 
-- Too old
-- Built without required codecs
-
-### Recommended Approach
-
-Build FFmpeg from source with shared libraries enabled:
+Install FFmpeg using the jetson-ffmpeg repository:
 
 ```bash
-./configure \
-  --enable-shared \
-  --enable-gpl \
-  --enable-libopus \
-  --enable-libvorbis
-make -j$(nproc)
-sudo make install
-sudo ldconfig
+git clone https://github.com/Keylost/jetson-ffmpeg
+cd jetson-ffmpeg
+./build_ffmpeg.sh
+```
+
+After installation, add to your bashrc:
+
+```bash
+echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 Verify:
